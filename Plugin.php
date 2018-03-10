@@ -41,11 +41,22 @@ class Plugin extends PluginBase
                 'description' => 'anandpatel.wysiwygeditors::lang.settings.description',
                 'icon' => 'icon-pencil-square-o',
                 'class' => 'AnandPatel\WysiwygEditors\Models\Settings',
-                'category' => SettingsManager::CATEGORY_CMS
+                'category' => SettingsManager::CATEGORY_CMS,
+		'permissions' => ['anandpatel.wysiwygeditors.access_settings']
             ]
         ];
     }
 
+    public function registerPermissions()
+    {
+        return [
+            'anandpatel.wysiwygeditors.access_settings' => [
+                'tab'   => 'Wysiwyg Editors',
+                'label' => 'Manage Wysiwyg Editors settings'
+            ]
+        ];
+    }
+	
     public function boot()
     {
         Event::listen('backend.form.extendFields', function ($form) {
